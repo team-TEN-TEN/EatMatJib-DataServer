@@ -1,4 +1,4 @@
-package com.tenten.eatmatjib.common.exception;
+package com.tenten.eatmatjib.data.common.exception;
 
 import com.fasterxml.jackson.databind.exc.InvalidFormatException;
 import jakarta.validation.ConstraintViolationException;

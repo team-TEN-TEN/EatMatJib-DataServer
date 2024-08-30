@@ -1,4 +1,4 @@
-package com.tenten.eatmatjib.common.config;
+package com.tenten.eatmatjib.data.common.config;
 
 import io.swagger.v3.oas.models.Components;
 import io.swagger.v3.oas.models.OpenAPI;

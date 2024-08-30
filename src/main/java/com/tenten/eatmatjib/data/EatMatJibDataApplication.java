@@ -1,4 +1,4 @@
-package com.tenten.eatmatjib;
+package com.tenten.eatmatjib.data;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -6,10 +6,10 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 @EnableJpaAuditing
 @SpringBootApplication
-public class EatMatJibApplication {
+public class EatMatJibDataApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(EatMatJibApplication.class, args);
+        SpringApplication.run(EatMatJibDataApplication.class, args);
     }
 
 }

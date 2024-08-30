@@ -1,4 +1,4 @@
-package com.tenten.eatmatjib.common.util;
+package com.tenten.eatmatjib.data.common.util;
 
 public class RegexPatternUtil {
 

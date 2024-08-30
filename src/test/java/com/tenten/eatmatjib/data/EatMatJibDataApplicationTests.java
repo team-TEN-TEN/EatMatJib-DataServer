@@ -1,10 +1,10 @@
-package com.tenten.eatmatjib;
+package com.tenten.eatmatjib.data;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class EatMatJibApplicationTests {
+class EatMatJibDataApplicationTests {
 
 	@Test
 	void contextLoads() {

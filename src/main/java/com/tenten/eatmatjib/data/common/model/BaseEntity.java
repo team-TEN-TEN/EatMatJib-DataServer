@@ -1,4 +1,4 @@
-package com.tenten.eatmatjib.common.model;
+package com.tenten.eatmatjib.data.common.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.EntityListeners;

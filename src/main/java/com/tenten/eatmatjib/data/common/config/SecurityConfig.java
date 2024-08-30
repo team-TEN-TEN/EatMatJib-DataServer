@@ -1,4 +1,4 @@
-package com.tenten.eatmatjib.common.config;
+package com.tenten.eatmatjib.data.common.config;
 
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
