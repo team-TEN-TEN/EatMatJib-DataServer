@@ -6,6 +6,6 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface DataMapper {
     Data findDataByMgtno(String mgtno);
-    void insertData(Data data);
+    void batchInsertData(List<Data> dataList);
     void batchUpdateData(List<Data> dataList);
 }
