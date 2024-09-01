@@ -4,7 +4,14 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.tenten.eatmatjib.data.pipeline.DataMapper">
-  <insert id="initData" parameterType="com.tenten.eatmatjib.data.pipeline.Data">
+  <select id="findDataByMgtno" parameterType="String"
+    resultType="com.tenten.eatmatjib.data.pipeline.Data">
+    SELECT *
+    FROM raw_restaurant
+    WHERE mgtno = #{mgtno}
+  </select>
+
+  <insert id="insertData" parameterType="com.tenten.eatmatjib.data.pipeline.Data">
     INSERT
     INTO raw_restaurant
     (opnsfteamcode,
@@ -97,7 +104,57 @@
             #{jtupsomainedf},
             #{homepage},
             1)
-
   </insert>
 
+  <update id="batchUpdateData" parameterType="java.util.List">
+    <foreach collection="list" item="data" separator=",">
+      UPDATE raw_restaurant
+      SET
+        opnsfteamcode = #{data.opnsfteamcode},
+        apvpermymd = #{data.apvpermymd},
+        apvcancelymd = #{data.apvcancelymd},
+        trdstategbn = #{data.trdstategbn},
+        trdstatenm = #{data.trdstatenm},
+        dtlstategbn = #{data.dtlstategbn},
+        dtlstatenm = #{data.dtlstatenm},
+        dcbymd = #{data.dcbymd},
+        clgstdt = #{data.clgstdt},
+        clgenddt = #{data.clgenddt},
+        ropnymd = #{data.ropnymd},
+        sitetel = #{data.sitetel},
+        sitearea = #{data.sitearea},
+        sitepostno = #{data.sitepostno},
+        sitewhladdr = #{data.sitewhladdr},
+        rdnwhladdr = #{data.rdnwhladdr},
+        rdnpostno = #{data.rdnpostno},
+        bplcnm = #{data.bplcnm},
+        lastmodts = #{data.lastmodts},
+        updategbn = #{data.updategbn},
+        updatedt = #{data.updatedt},
+        uptaenm = #{data.uptaenm},
+        x = #{data.x},
+        y = #{data.y},
+        sntuptaenm = #{data.sntuptaenm},
+        maneipcnt = #{data.maneipcnt},
+        wmeipcnt = #{data.wmeipcnt},
+        trdpjubnsenm = #{data.trdpjubnsenm},
+        lvsenm = #{data.lvsenm},
+        wtrsplyfacilsenm = #{data.wtrsplyfacilsenm},
+        totepnum = #{data.totepnum},
+        hoffepcnt = #{data.hoffepcnt},
+        fctyowkepcnt = #{data.fctyowkepcnt},
+        fctysiljobepcnt = #{data.fctysiljobepcnt},
+        fctypdtjobepcnt = #{data.fctypdtjobepcnt},
+        bdngownsenm = #{data.bdngownsenm},
+        isream = #{data.isream},
+        monam = #{data.monam},
+        multusnupsoyn = #{data.multusnupsoyn},
+        faciltotscp = #{data.faciltotscp},
+        jtupsoasgnno = #{data.jtupsoasgnno},
+        jtupsomainedf = #{data.jtupsomainedf},
+        homepage = #{data.homepage},
+        is_updated = 1
+      WHERE mgtno = #{data.mgtno}
+    </foreach>
+  </update>
 </mapper>
