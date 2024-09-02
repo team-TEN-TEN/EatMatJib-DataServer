@@ -10,7 +10,6 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 
 @EnableScheduling
 @SpringBootApplication
-@MapperScan("com.tenten.eatmatjib.data.pipeline")
 public class EatMatJibDataApplication {
 
     public static void main(String[] args) {

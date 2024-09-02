@@ -3,8 +3,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.tenten.eatmatjib.data.pipeline.DataMapper">
-  <insert id="initData" parameterType="com.tenten.eatmatjib.data.pipeline.Data">
+<mapper namespace="com.tenten.eatmatjib.data.pipeline.datamapper.DataMapper">
+  <insert id="initData" parameterType="com.tenten.eatmatjib.data.pipeline.dto.Data">
     INSERT
     INTO raw_restaurant
     (opnsfteamcode,
@@ -99,5 +99,16 @@
             1)
 
   </insert>
+
+  <select id="selectRawData" resultType="com.tenten.eatmatjib.data.pipeline.dto.Data">
+    SELECT * FROM RAW_RESTAURANT WHERE IS_UPDATED = 1;
+  </select>
+
+  <update id="changedColumns">
+    UPDATE RAW_RESTAURANT
+    SET is_updated = 0
+    WHERE is_updated = 1;
+  </update>
+
 
 </mapper>

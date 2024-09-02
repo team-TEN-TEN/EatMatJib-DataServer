@@ -1,4 +1,4 @@
-package com.tenten.eatmatjib.data.pipeline;
+package com.tenten.eatmatjib.data.pipeline.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
