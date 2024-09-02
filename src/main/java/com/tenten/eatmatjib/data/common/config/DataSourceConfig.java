@@ -18,7 +18,7 @@ public class DataSourceConfig {
     @Bean
     @Primary
     @Qualifier("eatDataConfig")
-    @ConfigurationProperties(prefix = "spring.datasource.data")
+    @ConfigurationProperties(prefix = "spring.datasource.hikari.data")
     public HikariConfig eatDataHikariConfig() {
         return new HikariConfig();
     }
@@ -32,7 +32,7 @@ public class DataSourceConfig {
 
     @Bean
     @Qualifier("eatDevConfig")
-    @ConfigurationProperties(prefix = "spring.datasource.dev")
+    @ConfigurationProperties(prefix = "spring.datasource.hikari.dev")
     public HikariConfig eatDevHikariConfig() {
         return new HikariConfig();
     }
