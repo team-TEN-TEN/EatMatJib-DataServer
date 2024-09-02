@@ -18,24 +18,4 @@
                 flyway.migrate();
             };
         }
-
-        @Bean(name = "flywayPrimary")
-        public Flyway flywayPrimary(@Qualifier("eatDataDataSource") DataSource primaryDataSource) {
-            Flyway flyway = Flyway.configure()
-                .dataSource(primaryDataSource)
-                .locations("classpath:db/migration")
-                .load();
-            flyway.migrate();
-            return flyway;
-        }
-
-        @Bean(name = "flywaySecondary")
-        public Flyway flywaySecondary(@Qualifier("eatDevDataSource") DataSource secondaryDataSource) {
-            Flyway flyway = Flyway.configure()
-                .dataSource(secondaryDataSource)
-                .locations("classpath:db/dev")
-                .load();
-            flyway.migrate();
-            return flyway;
-        }
     }

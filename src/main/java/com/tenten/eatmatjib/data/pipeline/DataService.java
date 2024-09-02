@@ -76,7 +76,9 @@ public class DataService {
                 dataMapper.batchInsertData(insertDataList);
             }
             System.out.println("데이터가 저장되었습니다.");
+
             dataProcessingService.processData();
+
         } catch (HttpClientErrorException e) {
             // HTTP 클라이언트 예외 처리
             throw new RuntimeException("HTTP Error: " + e.getStatusCode() + " - " + e.getResponseBodyAsString(), e);
