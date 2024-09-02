@@ -2,8 +2,12 @@ package com.tenten.eatmatjib.data.pipeline;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import java.io.IOException;
 import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
@@ -19,7 +23,7 @@ import org.springframework.web.client.RestTemplate;
 @RequiredArgsConstructor
 public class DataPipelineScheduler {
 
-    @Value("OPEN_API_KEY")
+    @Value("${OPEN_API_KEY}")
     private String openApiKey;
 
     private final DataMapper dataMapper;
@@ -28,7 +32,7 @@ public class DataPipelineScheduler {
 
 
     @Scheduled(cron = "0 0 2 * * ?")
-    public void updateData() throws IOException {
+    public void updateData() {
         try {
             // 처음 페이지 요청하여 totalRecords 가져오기
             String initialUrl = buildUrl(1, 1);
@@ -82,27 +86,28 @@ public class DataPipelineScheduler {
             // 데이터베이스에서 해당 데이터가 존재하는지 확인
             Data existingData = dataMapper.findDataByMgtno(data.getMgtno());
 
-            if (existingData == null && "I".equals(data.getUpdategbn())) {
+            if (existingData == null) {
                 // 데이터가 없고 새로 들어온 데이터면 삽입 목록에 추가
-                insertDataList.add(data);
-            } else if ("U".equals(data.getUpdategbn()) && isUpdated(data, existingData)) {
+                if ("I".equals(data.getUpdategbn())) {
+                    insertDataList.add(data);
+                }
+            } else {
                 // 데이터가 있고, 업데이트 필요하면 업데이트 목록에 추가
-                data.setIsUpdated(1);
-                updateDataList.add(data);
+                if ("U".equals(data.getUpdategbn()) && isOutdated(data, existingData)) {
+                    data.setIsUpdated(1);
+                    updateDataList.add(data);
+                }
             }
         }
     }
-    private boolean isUpdated(Data newData, Data existingData) {
+    private boolean isOutdated(Data newData, Data existingData) {
         // 새 데이터의 최종 수정일자가 기존 데이터보다 나중이면 true 반환
         return newData.getLastmodts().compareTo(existingData.getLastmodts()) > 0;
     }
 
     private void checkResponse(ResponseEntity<String> responseEntity) {
         HttpStatusCode statusCode = responseEntity.getStatusCode();
-        if (statusCode.is2xxSuccessful()) {
-            // 200-299 응답 코드 확인
-            return;
-        } else {
+        if (!statusCode.is2xxSuccessful()) {
             throw new RuntimeException("Unexpected HTTP status code: " + statusCode);
         }
     }
