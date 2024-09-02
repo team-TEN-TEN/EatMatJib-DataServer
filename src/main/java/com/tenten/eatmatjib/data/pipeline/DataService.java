@@ -2,6 +2,9 @@ package com.tenten.eatmatjib.data.pipeline;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.tenten.eatmatjib.data.pipeline.datamapper.DataMapper;
+import com.tenten.eatmatjib.data.pipeline.dto.Data;
+import com.tenten.eatmatjib.data.pipeline.service.DataProcessingService;
 import java.net.URLEncoder;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
@@ -21,7 +24,7 @@ public class DataService {
 
     private final DataMapper dataMapper;
     private final RestTemplate restTemplate;
-
+    private final DataProcessingService dataProcessingService;
     public void initData() {
         ObjectMapper objectMapper = new ObjectMapper();
 
@@ -34,7 +37,7 @@ public class DataService {
             JsonNode initialRootNode = objectMapper.readTree(initialResponseEntity.getBody());
 
             // "list_total_count" 값을 추출
-            int totalRecords = initialRootNode.path("LOCALDATA_072404").path("list_total_count").asInt();
+            int totalRecords = 2000; //initialRootNode.path("LOCALDATA_072404").path("list_total_count").asInt();
 
             // 첫 페이지의 데이터 저장
             JsonNode initialRowNode = initialRootNode.path("LOCALDATA_072404").path("row");
@@ -59,6 +62,7 @@ public class DataService {
                 }
             }
             System.out.println("모든 데이터가 저장되었습니다.");
+            dataProcessingService.processData();
         } catch (HttpClientErrorException e) {
             // HTTP 클라이언트 예외 처리
             throw new RuntimeException("HTTP Error: " + e.getStatusCode() + " - " + e.getResponseBodyAsString(), e);
