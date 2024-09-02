@@ -56,8 +56,9 @@ public class DataService {
                 ResponseEntity<String> pageResponseEntity = restTemplate.getForEntity(requestUrl, String.class);
                 checkResponse(pageResponseEntity);
 
-                System.out.println("데이터 가져오는 중...");
-                
+                System.out.println("데이터 가져오는 중..." + String.format("%d", idx - Constants.START_IDX)
+                    + "/" + String.format("%d", totalRecords - Constants.START_IDX));
+
                 JsonNode pageRootNode = objectMapper.readTree(pageResponseEntity.getBody());
                 JsonNode rowNode = pageRootNode.path("LOCALDATA_072404").path("row");
 
