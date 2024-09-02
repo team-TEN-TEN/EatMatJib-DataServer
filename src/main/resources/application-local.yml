@@ -3,12 +3,12 @@ spring:
     import: application-secret.properties
   datasource:
     data:
-      jdbc-url: jdbc:h2:mem:testdb;MODE=MYSQL
+      url: jdbc:h2:mem:testdb;MODE=MYSQL
       username: sa
       password:
       driver-class-name: org.h2.Driver
     dev:
-      jdbc-url: jdbc:h2:mem:testdb2;MODE=MYSQL
+      url: jdbc:h2:mem:testdb2;MODE=MYSQL
       username: sa
       password:
       driver-class-name: org.h2.Driver

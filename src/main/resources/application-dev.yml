@@ -3,12 +3,12 @@ spring:
     import: application-secret.properties
   datasource:
     data:
-      jdbc-url: ${RDS_URL}
+      url: ${RDS_URL}
       username: ${RDS_USERNAME}
       password: ${RDS_PASSWORD}
       driver-class-name: com.mysql.cj.jdbc.Driver
     dev:
-      jdbc-url: ${EATMATJIB_URL}
+      url: ${EATMATJIB_URL}
       username: ${RDS_USERNAME}
       password: ${RDS_PASSWORD}
       driver-class-name: com.mysql.cj.jdbc.Driver
