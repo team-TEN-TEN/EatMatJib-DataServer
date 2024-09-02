@@ -2,7 +2,14 @@ spring:
   config:
     import: application-secret.properties
   datasource:
-    url: ${RDS_URL}
-    username: ${RDS_USERNAME}
-    password: ${RDS_PASSWORD}
-    driver-class-name: com.mysql.cj.jdbc.Driver
+    data:
+      url: ${RDS_URL}
+      username: ${RDS_USERNAME}
+      password: ${RDS_PASSWORD}
+      driver-class-name: com.mysql.cj.jdbc.Driver
+    dev:
+      url: ${EATMATJIB_URL}
+      username: ${RDS_USERNAME}
+      password: ${RDS_PASSWORD}
+      driver-class-name: com.mysql.cj.jdbc.Driver
+
