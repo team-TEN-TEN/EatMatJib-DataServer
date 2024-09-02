@@ -1,13 +1,8 @@
 package com.tenten.eatmatjib.data.common.config;
 
-import com.zaxxer.hikari.HikariConfig;
-import com.zaxxer.hikari.HikariDataSource;
 import javax.sql.DataSource;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
@@ -17,30 +12,30 @@ public class DataSourceConfig {
 
     @Bean
     @Primary
-    @Qualifier("eatDataConfig")
     @ConfigurationProperties(prefix = "spring.datasource.data")
-    public HikariConfig eatDataHikariConfig() {
-        return new HikariConfig();
+    public DataSourceProperties eatDataDataSourceProperties() {
+        return new DataSourceProperties();
     }
 
-    @Bean
+    @Bean(name = "eatDataDataSource")
     @Primary
-    @Qualifier("eatDataDataSource")
     public DataSource eatDataDataSource() {
-        return new HikariDataSource(eatDataHikariConfig());
+        return eatDataDataSourceProperties()
+                .initializeDataSourceBuilder()
+                .build();
     }
 
     @Bean
-    @Qualifier("eatDevConfig")
     @ConfigurationProperties(prefix = "spring.datasource.dev")
-    public HikariConfig eatDevHikariConfig() {
-        return new HikariConfig();
+    public DataSourceProperties eatDevDataSourceProperties() {
+        return new DataSourceProperties();
     }
 
-    @Bean
-    @Qualifier("eatDevDataSource")
+    @Bean(name = "eatDevDataSource")
     public DataSource eatDevDataSource() {
-        return new HikariDataSource(eatDevHikariConfig());
+        return eatDevDataSourceProperties()
+                .initializeDataSourceBuilder()
+                .build();
     }
 }
 
