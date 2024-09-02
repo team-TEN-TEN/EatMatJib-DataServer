@@ -5,23 +5,19 @@
 
 <mapper namespace="com.tenten.eatmatjib.data.pipeline.devmapper.EatDevMapper">
   <insert id="dataSave" parameterType="java.util.List">
-    <foreach collection="list" item="item" separator=";">
-      MERGE INTO restaurant AS target
-      USING (VALUES (#{item.name}, #{item.zipCode}, #{item.address}, #{item.cuisine}, #{item.x}, #{item.y}, #{item.phoneNumber}, #{item.homepageUrl}, #{item.updatedAt}))
-      AS source (name, zip_code, address, cuisine, x, y, phone_number, homepage_url, updated_at)
-      ON target.name = source.name AND target.address = source.address
-      WHEN MATCHED THEN
-      UPDATE SET zip_code = source.zip_code,
-      cuisine = source.cuisine,
-      x = source.x,
-      y = source.y,
-      phone_number = source.phone_number,
-      homepage_url = source.homepage_url,
-      updated_at = source.updated_at
-      WHEN NOT MATCHED THEN
-      INSERT (name, zip_code, address, cuisine, x, y, phone_number, homepage_url, updated_at)
-      VALUES (source.name, source.zip_code, source.address, source.cuisine, source.x, source.y, source.phone_number, source.homepage_url, source.updated_at)
+    INSERT INTO restaurant (name, zip_code, address, cuisine, x, y, phone_number, homepage_url, updated_at)
+    VALUES
+    <foreach collection="list" item="item" separator=",">
+      (#{item.name}, #{item.zipCode}, #{item.address}, #{item.cuisine}, #{item.x}, #{item.y}, #{item.phoneNumber}, #{item.homepageUrl}, #{item.updatedAt})
     </foreach>
+    ON DUPLICATE KEY UPDATE
+    zip_code = VALUES(zip_code),
+    cuisine = VALUES(cuisine),
+    x = VALUES(x),
+    y = VALUES(y),
+    phone_number = VALUES(phone_number),
+    homepage_url = VALUES(homepage_url)
+    updated_at = VALUES(updated_at)
   </insert>
 
 </mapper>
