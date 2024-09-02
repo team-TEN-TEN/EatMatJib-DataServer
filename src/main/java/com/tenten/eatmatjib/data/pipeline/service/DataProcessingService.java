@@ -20,7 +20,6 @@ public class DataProcessingService {
 
     public void processData() {
         List<Data> dataList = dataMapper.selectRawData();
-        System.out.println("조회 완료");
         List<RestaurantData> restaurantDataList = new ArrayList<>();
         for (Data data : dataList) {
             if (data.getBplcnm() == null || data.getBplcnm().trim().isEmpty()) {
@@ -35,8 +34,6 @@ public class DataProcessingService {
                 restaurantData.setX(x);
                 restaurantData.setY(y);
             } catch (NumberFormatException e) {
-                // 좌표 변환에 실패한 경우 기본값 설정 또는 데이터 제외
-                System.out.println("잘못된 좌표 형식: " + data.getX() + ", " + data.getY());
                 continue; // 데이터 제외
             }
 
