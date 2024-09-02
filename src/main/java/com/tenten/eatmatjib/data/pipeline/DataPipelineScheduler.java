@@ -34,6 +34,8 @@ public class DataPipelineScheduler {
     @Scheduled(cron = "0 0 2 * * ?")
     public void updateData() {
         try {
+            System.out.println("데이터 갱신 시작...");
+
             // 처음 페이지 요청하여 totalRecords 가져오기
             String initialUrl = buildUrl(1, 1);
             ResponseEntity<String> initialResponseEntity = restTemplate.getForEntity(initialUrl, String.class);
@@ -48,9 +50,14 @@ public class DataPipelineScheduler {
             List<Data> insertDataList = new ArrayList<>();
             List<Data> updateDataList = new ArrayList<>();
 
+            System.out.println("갱신 준비 완료");
+
             // 데이터 페이지 단위로 가져오기
             int pageSize = 1000;
             for (int idx = Constants.START_IDX; idx <= totalRecords; idx += pageSize) {
+
+                System.out.println("데이터 가져오는 중...");
+
                 String requestUrl = buildUrl(idx, Math.min(idx + pageSize - 1, totalRecords));
                 ResponseEntity<String> pageResponseEntity = restTemplate.getForEntity(requestUrl, String.class);
                 checkResponse(pageResponseEntity);
@@ -68,7 +75,8 @@ public class DataPipelineScheduler {
             if (!updateDataList.isEmpty()) {
                 dataMapper.batchUpdateData(updateDataList);
             }
-            System.out.println("데이터가 갱신되었습니다.");
+            System.out.println("데이터가 갱신되었습니다. 갱신된 데이터: " + updateDataList.size() +
+                "삽입된 데이터: " + insertDataList.size());
 
         } catch (HttpClientErrorException e) {
             // HTTP 클라이언트 예외 처리

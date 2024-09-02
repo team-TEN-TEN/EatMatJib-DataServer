@@ -32,6 +32,8 @@ public class DataService {
     @Transactional
     public void initData() {
         try {
+            System.out.println("데이터 초기화 시작...");
+
             // 처음 페이지 요청하여 totalRecords 가져오기
             String initialUrl = buildUrl(1, 1);
             ResponseEntity<String> initialResponseEntity = restTemplate.getForEntity(initialUrl, String.class);
@@ -45,6 +47,8 @@ public class DataService {
             // 데이터를 배치로 저장하기 위한 리스트 준비
             List<Data> insertDataList = new ArrayList<>();
 
+            System.out.println("초기화 준비 완료");
+
             // 페이지 단위로 데이터 가져오기
             int pageSize = 1000;
             for (int idx = Constants.START_IDX; idx <= totalRecords; idx += pageSize) {
@@ -52,6 +56,8 @@ public class DataService {
                 ResponseEntity<String> pageResponseEntity = restTemplate.getForEntity(requestUrl, String.class);
                 checkResponse(pageResponseEntity);
 
+                System.out.println("데이터 가져오는 중...");
+                
                 JsonNode pageRootNode = objectMapper.readTree(pageResponseEntity.getBody());
                 JsonNode rowNode = pageRootNode.path("LOCALDATA_072404").path("row");
 
