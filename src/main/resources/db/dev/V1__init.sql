@@ -9,7 +9,7 @@ CREATE TABLE IF NOT EXISTS restaurant
     y            DECIMAL(16, 10) NOT NULL,
     phone_number VARCHAR(20)    NULL,
     homepage_url VARCHAR(255)   NULL,
-    avg_score    DECIMAL(1, 2)  DEFAULT 0.00 NOT NULL,
+    avg_score    DECIMAL(3, 1)  DEFAULT 0.00 NOT NULL,
     view_count   INT            DEFAULT 0 NOT NULL,
     updated_at   TIMESTAMP(6)   NOT NULL,
     UNIQUE (name, address)
