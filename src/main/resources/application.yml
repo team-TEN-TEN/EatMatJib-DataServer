@@ -16,3 +16,12 @@ jwt:
   time:
     access: ${JWT_ACCESS}
     refresh: ${JWT_REFRESH}
+
+# Scheduler
+schedule:
+  cron:
+  use: true
+
+mybatis:
+  mapper-locations: classpath:mappers/*.xml
+  type-aliases-package: com.tenten.eatmatjib.data.pipeline
