@@ -2,6 +2,7 @@ package com.tenten.eatmatjib.data.pipeline;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.tenten.eatmatjib.data.pipeline.datamapper.DataMapper;
 import java.io.IOException;
 import java.net.URLEncoder;
 import java.util.ArrayList;
