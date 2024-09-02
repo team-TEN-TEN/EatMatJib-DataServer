@@ -6,9 +6,9 @@ import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
 public interface DataMapper {
-    com.tenten.eatmatjib.data.pipeline.Data findDataByMgtno(String mgtno);
-    void batchInsertData(List<com.tenten.eatmatjib.data.pipeline.Data> dataList);
-    void batchUpdateData(List<com.tenten.eatmatjib.data.pipeline.Data> dataList);
+    Data findDataByMgtno(String mgtno);
+    void batchInsertData(List<Data> dataList);
+    void batchUpdateData(List<Data> dataList);
 
     List<Data> selectRawData();
 

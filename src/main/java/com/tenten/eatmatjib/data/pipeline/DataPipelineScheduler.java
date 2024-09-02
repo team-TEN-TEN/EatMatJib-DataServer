@@ -3,6 +3,7 @@ package com.tenten.eatmatjib.data.pipeline;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.tenten.eatmatjib.data.pipeline.datamapper.DataMapper;
+import com.tenten.eatmatjib.data.pipeline.dto.Data;
 import com.tenten.eatmatjib.data.pipeline.service.DataProcessingService;
 import java.io.IOException;
 import java.net.URLEncoder;
@@ -76,7 +77,9 @@ public class DataPipelineScheduler {
             }
             System.out.println("데이터가 갱신되었습니다. 갱신된 데이터: " + updateDataList.size() +
                     "삽입된 데이터: " + insertDataList.size());
+
             dataProcessingService.processData();
+
         } catch (HttpClientErrorException e) {
             // HTTP 클라이언트 예외 처리
             throw new RuntimeException("HTTP Error: " + e.getStatusCode() + " - " + e.getResponseBodyAsString(), e);

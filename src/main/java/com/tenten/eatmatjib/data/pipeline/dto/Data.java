@@ -93,5 +93,11 @@ public class Data {
     private String jtupsomainedf;
     @JsonProperty("HOMEPAGE")
     private String homepage;
+
+    private int is_updated;
+
+    public void setIsUpdated(int isUpdated) {
+        this.is_updated = isUpdated;
+    }
 }
 

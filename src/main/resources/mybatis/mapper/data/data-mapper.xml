@@ -5,7 +5,7 @@
 
 <mapper namespace="com.tenten.eatmatjib.data.pipeline.datamapper.DataMapper">
   <select id="findDataByMgtno" parameterType="String"
-    resultType="com.tenten.eatmatjib.data.pipeline.Data">
+    resultType="com.tenten.eatmatjib.data.pipeline.dto.Data">
     SELECT *
     FROM raw_restaurant
     WHERE mgtno = #{mgtno}

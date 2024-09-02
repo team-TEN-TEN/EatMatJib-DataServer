@@ -3,6 +3,7 @@ package com.tenten.eatmatjib.data.pipeline;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.tenten.eatmatjib.data.pipeline.datamapper.DataMapper;
+import com.tenten.eatmatjib.data.pipeline.dto.Data;
 import com.tenten.eatmatjib.data.pipeline.service.DataProcessingService;
 import jakarta.annotation.PostConstruct;
 import java.io.IOException;
