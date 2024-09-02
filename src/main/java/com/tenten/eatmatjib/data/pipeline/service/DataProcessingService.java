@@ -39,6 +39,10 @@ public class DataProcessingService {
 
             restaurantData.setName(data.getBplcnm());
 
+            if (data.getSitewhladdr() == null && data.getRdnwhladdr() == null) {
+                continue;
+            }
+
             if (data.getRdnpostno() != null && !data.getRdnpostno().trim().isEmpty()) {
                 restaurantData.setZipCode(data.getRdnpostno());
                 restaurantData.setAddress(data.getRdnwhladdr());
