@@ -26,8 +26,14 @@ public class DataProcessingService {
                 continue;
             }
 
-            if (data.getDtlstatenm().trim() == "폐업") {
-                continue;
+            String dtlstatenm = data.getDtlstatenm().trim();
+            if ("폐업".equals(dtlstatenm)) {
+                Data existingData = dataMapper.findDataByMgtno(data.getMgtno());
+
+                if (existingData == null) {
+                    continue;
+                }
+                // 폐업한 가게 정보 삭제하는 로직 작성 필요
             }
 
             RestaurantData restaurantData = new RestaurantData();
