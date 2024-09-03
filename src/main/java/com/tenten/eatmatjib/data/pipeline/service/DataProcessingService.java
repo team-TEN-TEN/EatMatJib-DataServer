@@ -97,9 +97,9 @@ public class DataProcessingService {
         }
         if (restaurantDataList.size() > 0) {
             dataSave.dataSave(restaurantDataList);
-            System.out.println("데이터 전처리 및 저장을 완료했습니다.");
+            System.out.println("데이터 전처리 및 저장을 완료했습니다. 저장된 데이터: " + restaurantDataList.size());
         } else {
-            System.out.println("갱신할 데이터가 없습니다.");
+            System.out.println("데이터 전처리 및 저장을 완료했습니다. 저장된 데이터: " + 0);
         }
 
     }
