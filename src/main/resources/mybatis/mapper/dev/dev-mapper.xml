@@ -5,10 +5,10 @@
 
 <mapper namespace="com.tenten.eatmatjib.data.pipeline.devmapper.EatDevMapper">
   <insert id="dataSave" parameterType="java.util.List">
-    INSERT INTO restaurant (name, zip_code, address, cuisine, x, y, phone_number, homepage_url, updated_at)
+    INSERT INTO restaurant (name, zip_code, address, cuisine, x, y, phone_number, homepage_url, avg_score, view_count, updated_at)
     VALUES
     <foreach collection="list" item="item" separator=",">
-      (#{item.name}, #{item.zipCode}, #{item.address}, #{item.cuisine}, #{item.x}, #{item.y}, #{item.phoneNumber}, #{item.homepageUrl}, #{item.updatedAt})
+      (#{item.name}, #{item.zipCode}, #{item.address}, #{item.cuisine}, #{item.x}, #{item.y}, #{item.phoneNumber}, #{item.homepageUrl}, #{item.avgScore}, #{item.viewCount}, #{item.updatedAt})
     </foreach>
     ON DUPLICATE KEY UPDATE
     zip_code = VALUES(zip_code),
@@ -16,7 +16,9 @@
     x = VALUES(x),
     y = VALUES(y),
     phone_number = VALUES(phone_number),
-    homepage_url = VALUES(homepage_url)
+    homepage_url = VALUES(homepage_url),
+    avg_score = COALESCE(VALUES(avg_score), 0),
+    view_count = COALESCE(VALUES(view_count), 0),
     updated_at = VALUES(updated_at)
   </insert>
 
