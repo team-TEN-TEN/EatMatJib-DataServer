@@ -43,7 +43,7 @@ public class DataInitService {
             JsonNode initialRootNode = objectMapper.readTree(initialResponseEntity.getBody());
 
             // "list_total_count" 값을 추출
-            int totalRecords = 500100; //initialRootNode.path("LOCALDATA_072404").path("list_total_count").asInt();
+            int totalRecords = initialRootNode.path("LOCALDATA_072404").path("list_total_count").asInt();
 
             // 데이터를 배치로 저장하기 위한 리스트 준비
             List<Data> insertDataList = new ArrayList<>();

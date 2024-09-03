@@ -167,7 +167,7 @@
   <update id="changedColumns">
     UPDATE raw_restaurant
     SET is_updated = 0
-    WHERE is_updated = 1;
+    WHERE is_updated = 1
   </update>
 
 
