@@ -26,6 +26,10 @@ public class DataProcessingService {
                 continue;
             }
 
+            if (data.getDtlstatenm().trim() == "폐업") {
+                continue;
+            }
+
             RestaurantData restaurantData = new RestaurantData();
 
             try {
