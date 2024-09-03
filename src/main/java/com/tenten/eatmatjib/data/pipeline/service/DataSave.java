@@ -14,7 +14,6 @@ public class DataSave {
     private final EatDevMapper eatDevMapper;
     private final DataMapper dataMapper;
     public void dataSave(List<RestaurantData> restaurantDataList) {
-        System.out.println("저장");
         eatDevMapper.dataSave(restaurantDataList);
         dataMapper.changedColumns();
     }

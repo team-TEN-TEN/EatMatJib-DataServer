@@ -23,5 +23,9 @@ public class RestaurantData {
 
     private String homepageUrl;
 
+    private BigDecimal avgScore;
+
+    private int viewCount;
+
     private LocalDateTime updatedAt;
 }

@@ -1,7 +1,8 @@
-package com.tenten.eatmatjib.data.pipeline;
+package com.tenten.eatmatjib.data.pipeline.scheduler;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.tenten.eatmatjib.data.pipeline.Constants;
 import com.tenten.eatmatjib.data.pipeline.datamapper.DataMapper;
 import com.tenten.eatmatjib.data.pipeline.dto.Data;
 import com.tenten.eatmatjib.data.pipeline.service.DataProcessingService;
@@ -56,7 +57,8 @@ public class DataPipelineScheduler {
             int pageSize = 1000;
             for (int idx = Constants.START_IDX; idx <= totalRecords; idx += pageSize) {
 
-                System.out.println("데이터 가져오는 중...");
+                System.out.println("데이터 가져오는 중..." + String.format("%d", idx - Constants.START_IDX)
+                    + "/" + String.format("%d", totalRecords - Constants.START_IDX));
 
                 String requestUrl = buildUrl(idx, Math.min(idx + pageSize - 1, totalRecords));
                 ResponseEntity<String> pageResponseEntity = restTemplate.getForEntity(requestUrl, String.class);

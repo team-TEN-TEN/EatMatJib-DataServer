@@ -161,13 +161,13 @@
   </update>
 
   <select id="selectRawData" resultType="com.tenten.eatmatjib.data.pipeline.dto.Data">
-    SELECT * FROM RAW_RESTAURANT WHERE IS_UPDATED = 1;
+    SELECT * FROM raw_restaurant WHERE IS_UPDATED = 1;
   </select>
 
   <update id="changedColumns">
-    UPDATE RAW_RESTAURANT
+    UPDATE raw_restaurant
     SET is_updated = 0
-    WHERE is_updated = 1;
+    WHERE is_updated = 1
   </update>
 
 
