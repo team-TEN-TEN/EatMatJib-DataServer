@@ -1,5 +1,6 @@
 package com.tenten.eatmatjib.data.pipeline.service;
 
+import com.tenten.eatmatjib.data.pipeline.Constants;
 import com.tenten.eatmatjib.data.pipeline.Cuisine;
 import com.tenten.eatmatjib.data.pipeline.datamapper.DataMapper;
 import com.tenten.eatmatjib.data.pipeline.dto.Data;
@@ -19,9 +20,15 @@ public class DataProcessingService {
     private final DataSave dataSave;
 
     public void processData() {
+        System.out.println("데이터 전처리 시작...");
+
         List<Data> dataList = dataMapper.selectRawData();
         List<RestaurantData> restaurantDataList = new ArrayList<>();
-        for (Data data : dataList) {
+        int dataSize = dataList.size();
+
+        for (int idx = 0; idx < dataSize; idx++) {
+            Data data = dataList.get(idx);
+
             if (data.getBplcnm() == null || data.getBplcnm().trim().isEmpty()) {
                 continue;
             }
@@ -77,11 +84,24 @@ public class DataProcessingService {
             } else {
                 restaurantData.setHomepageUrl(data.getHomepage());
             }
+            restaurantData.setAvgScore(BigDecimal.valueOf(0));
+            restaurantData.setViewCount(0);
             restaurantData.setUpdatedAt(LocalDateTime.now());
 
             restaurantDataList.add(restaurantData);
+
+            if (idx % 1000 == 0) {
+                System.out.println("데이터 처리 중..." + String.format("%d", idx)
+                    + "/" + String.format("%d", dataSize));
+            }
         }
-        dataSave.dataSave(restaurantDataList);
+        if (restaurantDataList.size() > 0) {
+            dataSave.dataSave(restaurantDataList);
+            System.out.println("데이터 전처리 및 저장을 완료했습니다.");
+        } else {
+            System.out.println("갱신할 데이터가 없습니다.");
+        }
+
     }
 
     private String normalizePhoneNumber(String phoneNumber) {
