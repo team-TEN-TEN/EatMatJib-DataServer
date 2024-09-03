@@ -1,7 +1,8 @@
-package com.tenten.eatmatjib.data.pipeline;
+package com.tenten.eatmatjib.data.pipeline.scheduler;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.tenten.eatmatjib.data.pipeline.Constants;
 import com.tenten.eatmatjib.data.pipeline.datamapper.DataMapper;
 import com.tenten.eatmatjib.data.pipeline.dto.Data;
 import com.tenten.eatmatjib.data.pipeline.service.DataProcessingService;

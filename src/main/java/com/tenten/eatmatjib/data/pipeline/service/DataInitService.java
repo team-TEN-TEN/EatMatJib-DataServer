@@ -1,18 +1,15 @@
-package com.tenten.eatmatjib.data.pipeline;
+package com.tenten.eatmatjib.data.pipeline.service;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.tenten.eatmatjib.data.pipeline.Constants;
 import com.tenten.eatmatjib.data.pipeline.datamapper.DataMapper;
 import com.tenten.eatmatjib.data.pipeline.dto.Data;
-import com.tenten.eatmatjib.data.pipeline.service.DataProcessingService;
-import jakarta.annotation.PostConstruct;
-import java.io.IOException;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Profile;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -23,7 +20,7 @@ import org.springframework.web.client.RestTemplate;
 
 @Service
 @RequiredArgsConstructor
-public class DataService {
+public class DataInitService {
 
     @Value("${OPEN_API_KEY}")
     private String openApiKey;
@@ -46,7 +43,7 @@ public class DataService {
             JsonNode initialRootNode = objectMapper.readTree(initialResponseEntity.getBody());
 
             // "list_total_count" 값을 추출
-            int totalRecords = initialRootNode.path("LOCALDATA_072404").path("list_total_count").asInt();
+            int totalRecords = 500100; //initialRootNode.path("LOCALDATA_072404").path("list_total_count").asInt();
 
             // 데이터를 배치로 저장하기 위한 리스트 준비
             List<Data> insertDataList = new ArrayList<>();
